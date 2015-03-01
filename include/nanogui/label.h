@@ -33,7 +33,7 @@ public:
     /// Get the label color
     inline Color color() const { return mColor; }
     /// Set the label color
-    inline void setColor(Color color) { mColor = color; }
+    inline void setColor(const Color &color) { mColor = color; }
 
     /// Compute the size needed to fully display the label
     virtual Vector2i preferredSize(NVGcontext *ctx) const;

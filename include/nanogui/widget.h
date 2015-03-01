@@ -178,6 +178,18 @@ public:
     /// Draw the widget (and all child widgets)
     virtual void draw(NVGcontext *ctx);
 
+	void* operator new(size_t size)
+	{
+		void* p = _aligned_malloc(size, 16);
+		if (p == 0)  throw std::bad_alloc();
+		return p;
+	}
+
+		void operator delete(void *p)
+	{
+		Label* pc = static_cast<Label*>(p);
+		_aligned_free(p);
+	}
 protected:
     Widget *mParent;
     const Theme *mTheme;

@@ -53,7 +53,20 @@ public:
     Color mWindowPopup;
     Color mWindowPopupTransparent;
 
-    Theme(NVGcontext *ctx);
+	Theme(NVGcontext *ctx);
+
+	void* operator new(size_t size)
+	{
+		void* p = _aligned_malloc(size, 16);
+		if (p == 0)  throw std::bad_alloc();
+		return p;
+	}
+
+	void operator delete(void *p)
+	{
+		Theme* pc = static_cast<Theme*>(p);
+		_aligned_free(p);
+	}
 };
 
 NANOGUI_NAMESPACE_END
